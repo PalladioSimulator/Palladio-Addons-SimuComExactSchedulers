@@ -10,6 +10,8 @@
   <rm:locator searchPathRef="FeatureModel" failOnError="false" pattern="^de\.uka\.ipd\.sdq\..*" />
   <rm:locator searchPathRef="WorkflowEngine" failOnError="false" pattern="^de\.uka\.ipd\.sdq\..*" />
   <rm:locator searchPathRef="mediniqvt" failOnError="false" pattern="^de\.ikv\.medini\.qvt\..*" />
+  <rm:locator searchPathRef="eclipse-release" failOnError="false" />
+  <rm:locator searchPathRef="orbit" failOnError="false" />
   
   
   <rm:searchPath name="localresources">
@@ -69,6 +71,23 @@
     <rm:property key="buckminster.mutable" value="false"/>
   	<rm:uri format="http://www.ikv.de/qvt/update-site-indigo/"/>
   </rm:provider></rm:searchPath>
+  
+  <!-- Eclipse Update Sites -->
+  <rm:searchPath name="eclipse-release">
+  <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+ 	<rm:property key="buckminster.source" value="false"/>
+    <rm:property key="buckminster.mutable" value="false"/>
+  	<rm:uri format="http://download.eclipse.org/releases/indigo/"/>
+  </rm:provider></rm:searchPath>
+  
+   <!-- Orbit -->
+  <rm:searchPath name="orbit">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature,buckminster" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/"/>
+    </rm:provider>
+  </rm:searchPath>
   
   
 </rm:rmap>
