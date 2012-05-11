@@ -3,6 +3,9 @@ package edu.kit.ipd.sdq.pcm.simulation.scheduler.exact;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
+
 import scheduler.SchedulerLibrary;
 import scheduler.configuration.ActiveResourceConfiguration;
 import scheduler.configuration.ConfigurationFactory;
@@ -27,6 +30,7 @@ import de.uka.ipd.sdq.scheduler.IActiveResource;
 import de.uka.ipd.sdq.scheduler.IRunningProcess;
 import de.uka.ipd.sdq.scheduler.ISchedulableProcess;
 import de.uka.ipd.sdq.scheduler.SchedulerModel;
+import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.factory.QueueingConfigurationSwitch;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.loaddistribution.IInstanceSelector;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.loaddistribution.ILoadBalancer;
@@ -62,14 +66,21 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.timeslice.impl.QuantumTime
 public class ExactSchedulingFactory {
 	
 
-	private static final String PATHMAP_TO_SCHEDULER_LIBRARY = "pathmap://PCM_EXACT_SCHEDULER_MODELS/Library.scheduler";
+	private String schedulerConfigurationModel = "pathmap://PCM_EXACT_SCHEDULER_MODELS/Library.scheduler";
 	
 	private SchedulerModel model;
+	
+	
+	protected static Logger logger = Logger.getLogger(ExactSchedulingFactory.class.getName());
 	
 	public ExactSchedulingFactory(SchedulerModel model) {
 	    this.model = model;
 	}
 	
+	public ExactSchedulingFactory(SchedulerModel model, String schedulerConfigurationModel) {
+	    this.model = model;
+	    this.schedulerConfigurationModel = schedulerConfigurationModel;
+	}
 	
 	private Map<String, IResourceInstance> resource_instance_map = new Hashtable<String, IResourceInstance>();
 	private Map<String, ActiveProcess> process_map = new Hashtable<String, ActiveProcess>();
@@ -79,8 +90,7 @@ public class ExactSchedulingFactory {
 	public IActiveResource getResource(SchedulerModel model,
 			String schedulerName, int numReplicas, String sensorDescription) {
 
-		SchedulerLibrary lib = (SchedulerLibrary) SchedulerTools
-				.loadFromXMI(PATHMAP_TO_SCHEDULER_LIBRARY);
+		SchedulerLibrary lib = (SchedulerLibrary) SchedulerTools.loadFromXMI(schedulerConfigurationModel);
 		SchedulerConfiguration selectedConf = null;
 		for (SchedulerConfiguration conf : lib.getSchedulerConfiguration()) {
 			if (conf.getName().equals(schedulerName)) {
@@ -214,24 +224,29 @@ public class ExactSchedulingFactory {
     public IRunningProcess createRunningProcess(ISchedulableProcess process,
             ProcessConfiguration configuration, ActiveResourceConfiguration resourceConfiguration) {
 		String id = process.getId() + resourceConfiguration.getId();
-
+	
 		ActiveProcess active_process = process_map.get(id);
-
+		
 		if (active_process == null) {
 			if (resourceConfiguration.getReplicas() > 0) {
 
 				if (resourceConfiguration.getSchedulerConfiguration()
 						.getPriorityConfiguration() != null) {
-					IPriority prio = getPriority(configuration.getPriority(),
-							resourceConfiguration.getSchedulerConfiguration()
-									.getPriorityConfiguration().getRange());
+					
+					// set the priority to the right level
+					IPriority prio = getPriority(configuration.getPriority(),resourceConfiguration.getSchedulerConfiguration().getPriorityConfiguration().getRange());
+					prio.setValue(process.getPriority());
+					
 					active_process = new ProcessWithPriority(model, process, prio);
 					IPriorityUpdateStrategy updateStrategy = createPriorityUpdadateStrategy(
 							resourceConfiguration.getSchedulerConfiguration()
 									.getPriorityConfiguration()
 									.getBoostConfiguration(), active_process);
 					((ProcessWithPriority) active_process)
-							.setPriorityUpdateStrategy(updateStrategy);
+							.setPriorityUpdateStrategy(updateStrategy); 
+					
+					//System.out.println("Creating new process "+ active_process.getName() + " from Closed/Open Workload " + process.getClass().getName() + " with priority " + ((ProcessWithPriority)active_process).getStaticPriority());
+					
 				}
 				if (resourceConfiguration.getSchedulerConfiguration()
 						.getPreemptionConfiguration() != null) {
@@ -247,10 +262,10 @@ public class ExactSchedulingFactory {
 				} else {
 					active_process = new ActiveProcess(model, process);
 				}
+
 				process_map.put(id, active_process);
 			}
 		}
-
 		return active_process;
 	}
     

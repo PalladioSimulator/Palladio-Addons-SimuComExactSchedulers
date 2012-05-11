@@ -33,7 +33,7 @@
             class="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.factory.WindowsServer2003SchedulerFactory">
       </scheduler>
    </extension>
-   <extension
+     <extension
          id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.linux26o1"
          name="Linux 2.6 O(1) Scheduler"
          point="de.uka.ipd.sdq.scheduler">
