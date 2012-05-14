@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.buckminster"
+      label="SimuCom Exact Schedulers AddOn Buckminster Build Feature"
+      version="1.0.0.qualifier">
+
+   <includes
+         id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature"
+         version="0.0.0"/>
+
+</feature>
