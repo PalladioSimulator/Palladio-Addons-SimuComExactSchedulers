@@ -68,9 +68,9 @@ public class ResourceContainerWrapper extends SimulatedResourceContainer {
 			String combinedID, int capacity) {
 		IPassiveResource r = null;
 		if (cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WINXP) || 
-				cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WINXP) ||
-				cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WINXP) ||
-				cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WINXP)) {
+				cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WIN7) ||
+				cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WINVISTA) ||
+				cpuSchedulingStrategy.equals(SCHEDULING_STRATEGY_EXACT_WINSERVER2003)) {
 			r = getPassiveResourceWindows(name, passiveResourceID,
 					capacity, 1, true, true, activeResources.get(cpuResourceId)
 							.getScheduledResource());
