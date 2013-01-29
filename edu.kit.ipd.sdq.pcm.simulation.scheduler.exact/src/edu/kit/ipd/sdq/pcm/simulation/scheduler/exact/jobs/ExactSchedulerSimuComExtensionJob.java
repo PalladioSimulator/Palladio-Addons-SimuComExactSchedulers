@@ -21,7 +21,7 @@ public class ExactSchedulerSimuComExtensionJob extends AbstractSimuComExtensionJ
 			for (AbstractScheduledResource resource : simulatedResourceContainer.getActiveResources()) {
 				if (resource.getSchedulingStrategyID().startsWith("edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.")) {
 					AbstractSimulatedResourceContainer container = simuComModel.getResourceRegistry().removeResourceContainerFromRegistry(simulatedResourceContainer.getResourceContainerID());
-					ResourceContainerWrapper resourceContainerWrapper = new ResourceContainerWrapper(simuComModel, container.getResourceContainerID(), container, resource.getSchedulingStrategyID(), resource.getResourceTypeId());
+					ResourceContainerWrapper resourceContainerWrapper = new ResourceContainerWrapper(simuComModel, container.getResourceContainerID(), container, resource.getName(), resource.getSchedulingStrategyID());
 					simuComModel.getResourceRegistry().addResourceContainer(resourceContainerWrapper);
 				}
 			}
