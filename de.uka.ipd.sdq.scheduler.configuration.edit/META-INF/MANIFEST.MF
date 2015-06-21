@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.uka.ipd.sdq.scheduler.configuration.edit; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: scheduler.provider.SchedulerConfigurationEditPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -17,4 +17,4 @@ Require-Bundle: org.eclipse.core.runtime,
  de.uka.ipd.sdq.identifier.edit;visibility:=reexport,
  de.uka.ipd.sdq.units;visibility:=reexport,
  de.uka.ipd.sdq.units.edit;visibility:=reexport
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy

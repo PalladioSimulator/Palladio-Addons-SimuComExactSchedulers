@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Exact
+Bundle-Name: Exact scheduler simulator core engine
 Bundle-SymbolicName: edu.kit.ipd.sdq.pcm.simulation.scheduler.exact;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: de.uka.ipd.sdq.scheduler.configuration;bundle-version="1.0.0",
@@ -42,3 +42,4 @@ Export-Package: edu.kit.ipd.sdq.pcm.simulation.scheduler.exact,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.timeslice,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.timeslice.impl
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: palladiosimulator.org
