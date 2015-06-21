@@ -2,7 +2,7 @@
 <feature
       id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature"
       label="SimuCom Exact Scheduler AddOn"
-      version="1.0.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="sdq.ipd.kit.edu">
 
    <description url="http://sdq.ipd.kit.edu/">
