@@ -220,13 +220,6 @@ litigation.
    </license>
 
    <plugin
-         id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="de.uka.ipd.sdq.scheduler.configuration"
          download-size="0"
          install-size="0"
@@ -235,6 +228,13 @@ litigation.
 
    <plugin
          id="org.apache.log4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact"
          download-size="0"
          install-size="0"
          version="0.0.0"
