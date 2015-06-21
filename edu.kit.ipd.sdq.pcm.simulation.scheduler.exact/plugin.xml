@@ -52,14 +52,13 @@
    <extension
          id="de.uka.ipd.sdq.pcm.simucom.exactscheduler"
          name="Exact scheduler configuration for PCM SimuCom"
-         point="de.uka.ipd.sdq.workflow.extension">
-      <workflow_extension
+         point="de.uka.ipd.sdq.workflow.job">
+      <workflow_job
             extension_configurationbuilder="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.jobs.ExactSchedulerSimuComExtensionConfigurationBuilder"
             extension_job="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.jobs.ExactSchedulerSimuComExtensionJob"
-            name="Exact scheduler configuration"
             priority="90"
             workflow_id="workflow.extension.simucom.after.dock">
-      </workflow_extension>
+      </workflow_job>
    </extension>
    <extension
          point="org.eclipse.emf.ecore.uri_mapping">

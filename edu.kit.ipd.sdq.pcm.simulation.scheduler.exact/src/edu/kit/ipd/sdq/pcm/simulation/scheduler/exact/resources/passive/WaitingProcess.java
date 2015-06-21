@@ -6,24 +6,26 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.processes.IActiveProcess;
 
 public class WaitingProcess implements IWaitingProcess {
 
-	private IActiveProcess process;
-	private int num_requested;
+    private final IActiveProcess process;
+    private final long num_requested;
 
-	public WaitingProcess(IActiveProcess process, int num_requested) {
-		super();
-		this.process = process;
-		this.num_requested = num_requested;
-	}
+    public WaitingProcess(final IActiveProcess process, final long num_requested) {
+        super();
+        this.process = process;
+        this.num_requested = num_requested;
+    }
 
-	public IActiveProcess getActiveProcess() {
-		return process;
-	}
+    public IActiveProcess getActiveProcess() {
+        return process;
+    }
 
-	public int getNumRequested() {
-		return num_requested;
-	}
-	
-	public ISchedulableProcess getProcess() {
-		return process.getSchedulableProcess();
-	}
+    @Override
+    public long getNumRequested() {
+        return num_requested;
+    }
+
+    @Override
+    public ISchedulableProcess getProcess() {
+        return process.getSchedulableProcess();
+    }
 }

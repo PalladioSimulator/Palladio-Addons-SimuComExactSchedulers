@@ -4,20 +4,19 @@ import java.util.Map;
 
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComExtensionConfigurationBuilder;
 import de.uka.ipd.sdq.simucomframework.SimuComConfigExtension;
-import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
-import de.uka.ipd.sdq.workflow.launchconfig.extension.AbstractExtensionJobConfiguration;
+import de.uka.ipd.sdq.workflow.extension.AbstractExtensionJobConfiguration;
 
 public class ExactSchedulerSimuComExtensionConfigurationBuilder  extends SimuComExtensionConfigurationBuilder {
 
-	@Override
-	public AbstractExtensionJobConfiguration buildConfiguration(Map<String, Object> attributes) {
-		return null;
-	}
+    @Override
+    public AbstractExtensionJobConfiguration buildConfiguration(final Map<String, Object> attributes) {
+        return null;
+    }
 
-	@Override
-	public SimuComConfigExtension deriveSimuComConfigExtension(Map<String,Object> attributes) {
-		return null;
-	}
-	
+    @Override
+    public SimuComConfigExtension deriveSimuComConfigExtension(final Map<String,Object> attributes) {
+        return null;
+    }
+
 
 }

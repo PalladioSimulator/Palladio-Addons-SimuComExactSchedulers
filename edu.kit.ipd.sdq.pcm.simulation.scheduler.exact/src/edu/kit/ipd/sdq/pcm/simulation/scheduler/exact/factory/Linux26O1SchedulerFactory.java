@@ -7,10 +7,11 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.ExactSchedulingFactory;
 
 
 public class Linux26O1SchedulerFactory implements SchedulerExtensionFactory {
-	
-	public IActiveResource getExtensionScheduler(SchedulerModel model, String resourceName, String resourceId, int numberOfCores) {
-		ExactSchedulingFactory factory = new ExactSchedulingFactory(model);
-		return factory.getResource(model, "Linux 2.6.22", numberOfCores, "Utilisation of " + resourceName + " " + resourceId);
-	}
+
+    @Override
+    public IActiveResource getExtensionScheduler(final SchedulerModel model, final String resourceName, final String resourceId, final long numberOfCores) {
+        final ExactSchedulingFactory factory = new ExactSchedulingFactory(model);
+        return factory.getResource(model, "Linux 2.6.22", numberOfCores, "Utilisation of " + resourceName + " " + resourceId);
+    }
 
 }

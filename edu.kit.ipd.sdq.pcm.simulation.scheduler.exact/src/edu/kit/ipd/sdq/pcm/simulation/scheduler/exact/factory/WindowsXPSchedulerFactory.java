@@ -7,11 +7,12 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.ExactSchedulingFactory;
 
 
 public class WindowsXPSchedulerFactory implements SchedulerExtensionFactory {
-	
-	public IActiveResource getExtensionScheduler(SchedulerModel model, String resourceName, String resourceId, int numberOfCores) {
-		ExactSchedulingFactory factory = new ExactSchedulingFactory(model);
-		return factory.getResource(model, "Windows XP", numberOfCores, "Utilisation of " + resourceName + " " + resourceId);
-		//return new WindowsXPResource(model, resourceName, resourceId);
-	}
+
+    @Override
+    public IActiveResource getExtensionScheduler(final SchedulerModel model, final String resourceName, final String resourceId, final long numberOfCores) {
+        final ExactSchedulingFactory factory = new ExactSchedulingFactory(model);
+        return factory.getResource(model, "Windows XP", numberOfCores, "Utilisation of " + resourceName + " " + resourceId);
+        //return new WindowsXPResource(model, resourceName, resourceId);
+    }
 
 }
