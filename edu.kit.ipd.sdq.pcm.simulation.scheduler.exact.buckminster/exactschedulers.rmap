@@ -4,6 +4,7 @@
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.scheduler.\configuration.*" searchPathRef="ExactSchedulers" failOnError="true"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.pcm.\simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
   <rm:locator pattern="^edu\.kit\.ipd\.sdq\.pcm.\simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
+
   <rm:locator pattern="^org\.palladiosimulator\.pcm.\simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
   
   <rm:redirect pattern=".*"
