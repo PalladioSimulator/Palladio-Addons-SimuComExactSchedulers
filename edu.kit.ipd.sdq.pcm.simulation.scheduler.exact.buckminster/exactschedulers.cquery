@@ -3,4 +3,6 @@
     <cq:property key="pass" value="anonymous"/>
     <cq:property key="user" value="anonymous"/>
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^edu\.kit\.ipd\.sdq.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^org\.palladiosimulator.*" useWorkspace="false"/>
 </cq:componentQuery>
