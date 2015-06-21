@@ -11,7 +11,7 @@
          version="0.0.0"/>
 
    <plugin
-         id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact"
+         id="org.palladiosimulator.pcm.simulation.scheduler.exact.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
