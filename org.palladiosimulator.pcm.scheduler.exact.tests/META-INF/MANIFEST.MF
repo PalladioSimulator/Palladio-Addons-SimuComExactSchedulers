@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Exact schedulers test plugin
-Bundle-SymbolicName: org.palladiosimulator.pcm.scheduler.exact.tests
+Bundle-SymbolicName: org.palladiosimulator.pcm.simulation.scheduler.exact.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: palldiosimulator.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
