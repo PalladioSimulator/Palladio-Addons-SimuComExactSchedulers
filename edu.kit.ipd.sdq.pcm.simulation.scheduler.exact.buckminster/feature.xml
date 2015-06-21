@@ -5,13 +5,13 @@
       version="1.0.0.qualifier"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
-      
+
    <includes
          id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature"
          version="0.0.0"/>
 
    <plugin
-         id="org.palladiosimulator.pcm.scheduler.exact.tests"
+         id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact"
          download-size="0"
          install-size="0"
          version="0.0.0"
