@@ -212,6 +212,7 @@ public class SimActiveResource extends AbstractActiveResource {
     @Override
     public int getQueueLengthFor(final SchedulerEntity schedulerEntity, final int coreId) {
         assert (schedulerEntity instanceof SimResourceInstance);
-        return this.scheduler.getQueueLengthFor((SimResourceInstance)schedulerEntity);
+        // TODO: StB: Fixme: How to use the CoreId here?
+        return this.scheduler.getQueueLengthFor((SimResourceInstance)this.getInstanceList().get(coreId));
     }
 }
