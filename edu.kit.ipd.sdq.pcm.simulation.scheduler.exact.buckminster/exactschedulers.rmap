@@ -2,13 +2,12 @@
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.scheduler.\configuration.*" searchPathRef="ExactSchedulers" failOnError="true"/>
-  <rm:locator pattern="^de\.uka\.ipd\.sdq\.pcm.\simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
-  <rm:locator pattern="^edu\.kit\.ipd\.sdq\.pcm.\simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
-
-  <rm:locator pattern="^org\.palladiosimulator\.pcm.\simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
+  <rm:locator pattern="^de\.uka\.ipd\.sdq\.pcm\.simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
+  <rm:locator pattern="^edu\.kit\.ipd\.sdq\.pcm\.simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
+  <rm:locator pattern="^org\.palladiosimulator\.pcm\.simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
   
   <rm:redirect pattern=".*"
-		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Build/trunk/org.palladiosimulator.targetPlatformBuild/pcm_base.rmap" />
+		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Build/trunk/org.palladiosimulator.targetPlatformBuild/pcm_base.rmap" /> 
   
   <rm:searchPath name="ExactSchedulers">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn">
