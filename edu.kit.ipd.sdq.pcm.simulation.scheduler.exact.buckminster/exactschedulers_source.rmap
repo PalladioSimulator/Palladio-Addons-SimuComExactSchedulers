@@ -6,8 +6,8 @@
   <rm:locator pattern="^edu\.kit\.ipd\.sdq\.pcm\.simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
   <rm:locator pattern="^org\.palladiosimulator\.pcm\.simulation\.scheduler\.exact.*" searchPathRef="ExactSchedulers" failOnError="true"/>
   
-  <rm:redirect pattern=".*" href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Analyzer/SimuCom/trunk/org.palladiosimulator.simucom.buckminster/simucom.rmap"/>
-   
+  <rm:redirect pattern=".*"
+		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Addons/SimuComExactSchedulers/trunk/edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.buckminster/exactschedulers.rmap" /> 
   
   <rm:searchPath name="ExactSchedulers">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn">
