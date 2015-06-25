@@ -1,8 +1,5 @@
 package edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.factory;
 
-import scheduler.configuration.MultipleQueueConfiguration;
-import scheduler.configuration.SingleQueueConfiguration;
-import scheduler.configuration.util.ConfigurationSwitch;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.ExactSchedulingFactory;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.SimActiveResource;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.loaddistribution.IInstanceSelector;
@@ -12,6 +9,9 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.queueing.IQueueingStrategy
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.queueing.IRunQueue;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.queueing.strategies.MultipleQueuesStrategy;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.queueing.strategies.SingleQueueStrategy;
+import scheduler.configuration.MultipleQueueConfiguration;
+import scheduler.configuration.SingleQueueConfiguration;
+import scheduler.configuration.util.ConfigurationSwitch;
 
 public class QueueingConfigurationSwitch extends ConfigurationSwitch<IQueueingStrategy> {
 	

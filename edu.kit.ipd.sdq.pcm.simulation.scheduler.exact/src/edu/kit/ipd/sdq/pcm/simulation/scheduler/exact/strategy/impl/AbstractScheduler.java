@@ -2,7 +2,6 @@ package edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.strategy.impl;
 
 import java.util.Deque;
 
-import scheduler.configuration.StarvationBoost;
 import de.uka.ipd.sdq.scheduler.LoggingWrapper;
 import de.uka.ipd.sdq.scheduler.processes.IWaitingProcess;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.IResourceInstance;
@@ -12,6 +11,7 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.processes.impl.PreemptiveP
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.queueing.IQueueingStrategy;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.resources.passive.WaitingProcess;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.strategy.IScheduler;
+import scheduler.configuration.StarvationBoost;
 
 public abstract class AbstractScheduler implements IScheduler {
 	protected SimActiveResource resource;
