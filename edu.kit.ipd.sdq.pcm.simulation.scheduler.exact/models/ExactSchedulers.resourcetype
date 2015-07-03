@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourcetype:ResourceRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourcetype="http://palladiosimulator.org/PalladioComponentModel/ResourceType/5.0">
+<resourcetype:ResourceRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourcetype="http://palladiosimulator.org/PalladioComponentModel/ResourceType/5.1">
   <schedulingPolicies__ResourceRepository id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.winxp" entityName="Windows XP Scheduler"/>
   <schedulingPolicies__ResourceRepository id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.winvista" entityName="Windows Vista Scheduler"/>
   <schedulingPolicies__ResourceRepository id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.win7" entityName="Windows 7 Scheduler"/>
