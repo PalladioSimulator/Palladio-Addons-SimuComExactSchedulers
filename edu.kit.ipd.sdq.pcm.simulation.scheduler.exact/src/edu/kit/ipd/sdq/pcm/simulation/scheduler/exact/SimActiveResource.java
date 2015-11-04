@@ -50,6 +50,7 @@ public class SimActiveResource extends AbstractActiveResource {
             instanceList.add(exactSchedulingFactory.createResourceInstance(i, this));
         }
         main_instance = instanceList.get(0);
+        logger.warn("Note that the used exact scheduler " + this.resourceConf.getName() + "assumes that resource demands are specified in milliseconds.");
     }
 
     public IScheduler getScheduler() {
