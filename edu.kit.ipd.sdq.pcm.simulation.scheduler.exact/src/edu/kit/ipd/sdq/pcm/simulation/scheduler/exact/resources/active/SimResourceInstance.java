@@ -3,6 +3,10 @@ package edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.resources.active;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
+
 import de.uka.ipd.sdq.scheduler.IActiveResource;
 import de.uka.ipd.sdq.scheduler.IRunningProcess;
 import de.uka.ipd.sdq.scheduler.SchedulerModel;
@@ -14,6 +18,8 @@ import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.events.SchedulingEvent;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.events.SchedulingInterruptEvent;
 
 public class SimResourceInstance extends SchedulerEntity implements IResourceInstance {
+	/** logger for this class. */
+	private static final Logger log = Logger.getLogger(SimResourceInstance.class.getCanonicalName());
 
     private final int number;
     private final IActiveResource containing_resource;
@@ -107,7 +113,11 @@ public class SimResourceInstance extends SchedulerEntity implements IResourceIns
     @Override
     public void scheduleSchedulingEvent(final double time) {
         cancelSchedulingEvent();
-        scheduling_event.schedule(this, time);
+    	if (scheduling_event != null)
+            scheduling_event.schedule(this, time);
+    	else {
+    		log.log(Level.ERROR, "Tried to reschedule event that did not exists. Error in simulation may cause subsequent failures.");
+    	}
     }
 
     @Override
@@ -117,7 +127,11 @@ public class SimResourceInstance extends SchedulerEntity implements IResourceIns
 
     @Override
     public void cancelSchedulingEvent() {
-        scheduling_event.removeEvent();
+    	if (scheduling_event != null)
+            scheduling_event.removeEvent();
+    	else {
+    		log.log(Level.ERROR, "Tried to cancel event that did not exists. Error in simulation may cause subsequent failures.");
+    	}
     }
 
     @Override
@@ -159,7 +173,11 @@ public class SimResourceInstance extends SchedulerEntity implements IResourceIns
 
     @Override
     public void stop() {
-        scheduling_event.removeEvent();
+    	if (scheduling_event != null)
+    		scheduling_event.removeEvent();
+    	else {
+    		log.log(Level.ERROR, "Tried to remove event that did not exists. Error in simulation may cause subsequent failures.");
+    	}
     }
 
     @Override
