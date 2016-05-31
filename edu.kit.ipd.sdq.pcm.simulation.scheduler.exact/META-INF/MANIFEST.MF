@@ -14,7 +14,8 @@ Require-Bundle: de.uka.ipd.sdq.scheduler.configuration;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
  org.palladiosimulator.commons;bundle-version="1.0.0",
  org.palladiosimulator.pcm;bundle-version="4.0.0",
- de.uka.ipd.sdq.workflow
+ de.uka.ipd.sdq.workflow,
+ org.palladiosimulator.probeframework
 Export-Package: edu.kit.ipd.sdq.pcm.simulation.scheduler.exact,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.events,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.factory,
