@@ -38,6 +38,7 @@ the simulation code.
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="de.uka.ipd.sdq.identifier.edit"/>
       <import plugin="de.uka.ipd.sdq.units.edit"/>
+      <import plugin="org.palladiosimulator.branding"/>
    </requires>
 
    <plugin
@@ -56,13 +57,6 @@ the simulation code.
 
    <plugin
          id="de.uka.ipd.sdq.scheduler.configuration.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.palladiosimulator.branding"
          download-size="0"
          install-size="0"
          version="0.0.0"
