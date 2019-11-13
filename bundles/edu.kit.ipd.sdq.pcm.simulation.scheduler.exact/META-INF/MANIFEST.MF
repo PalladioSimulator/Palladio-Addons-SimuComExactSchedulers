@@ -42,5 +42,5 @@ Export-Package: edu.kit.ipd.sdq.pcm.simulation.scheduler.exact,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.strategy.impl,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.timeslice,
  edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.timeslice.impl
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: palladiosimulator.org
