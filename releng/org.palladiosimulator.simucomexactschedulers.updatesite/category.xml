@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<feature url="features/edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature_4.1.0.qualifier.jar" id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature" version="4.1.0.qualifier">
+	<feature url="features/edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature_4.2.0.qualifier.jar" id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature" version="4.2.0.qualifier">
 	   <category name="org.palladiosimulator.addons.category"/>
 	</feature>
-	<feature url="features/edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature.source_4.1.0.qualifier.jar" id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature.source" version="4.1.0.qualifier">
+	<feature url="features/edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature.source_4.2.0.qualifier.jar" id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature.source" version="4.2.0.qualifier">
 	   <category name="org.palladiosimulator.addons.source.category"/>
 	</feature>
 	<category-def name="org.palladiosimulator.addons.category" label="Palladio Bench Addons">
