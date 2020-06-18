@@ -2,7 +2,7 @@
 <feature
       id="edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.feature"
       label="SimuCom Exact Scheduler AddOn"
-      version="4.2.0.qualifier"
+      version="4.3.0.qualifier"
       plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
