@@ -9,6 +9,7 @@ import de.uka.ipd.sdq.scheduler.IActiveResource;
 import de.uka.ipd.sdq.scheduler.IRunningProcess;
 import de.uka.ipd.sdq.scheduler.ISchedulableProcess;
 import de.uka.ipd.sdq.scheduler.SchedulerModel;
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.factory.QueueingConfigurationSwitch;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.loaddistribution.IInstanceSelector;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.loaddistribution.ILoadBalancer;
@@ -85,8 +86,8 @@ public class ExactSchedulingFactory {
     private final Map<String, PriorityManagerImpl> manager_map = new Hashtable<String, PriorityManagerImpl>();
 
     /* Loads scheduler configuration */
-    public IActiveResource getResource(final SchedulerModel model,
-            final String schedulerName, final long numReplicas, final String sensorDescription) {
+    public IActiveResource getResource(final SchedulerModel model, final String schedulerName, final long numReplicas
+            , final String sensorDescription, IResourceTableManager resourceTableManager) {
 
         final SchedulerLibrary lib = (SchedulerLibrary) SchedulerTools.loadFromXMI(schedulerConfigurationModel);
         SchedulerConfiguration selectedConf = null;
@@ -103,7 +104,7 @@ public class ExactSchedulingFactory {
             resourceConf.setName(schedulerName);
             resourceConf.setReplicas((int)numReplicas);
             resourceConf.setSchedulerConfiguration(selectedConf);
-            final SimActiveResource resource = new SimActiveResource(this, model, resourceConf);
+            final SimActiveResource resource = new SimActiveResource(this, model, resourceConf, resourceTableManager);
             final IScheduler scheduler = createScheduler(model, resourceConf.getSchedulerConfiguration(), resource);
             resource.setScheduler(scheduler);
             return resource;

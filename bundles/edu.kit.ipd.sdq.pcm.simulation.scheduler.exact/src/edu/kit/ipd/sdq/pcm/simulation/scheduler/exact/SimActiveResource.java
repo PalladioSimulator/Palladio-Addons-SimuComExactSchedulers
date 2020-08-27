@@ -14,6 +14,7 @@ import de.uka.ipd.sdq.scheduler.SchedulerModel;
 import de.uka.ipd.sdq.scheduler.entities.SchedulerEntity;
 import de.uka.ipd.sdq.scheduler.processes.IWaitingProcess;
 import de.uka.ipd.sdq.scheduler.resources.active.AbstractActiveResource;
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.scheduler.sensors.IActiveResourceStateSensor;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.processes.IActiveProcess;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.processes.impl.ActiveProcess;
@@ -40,8 +41,9 @@ public class SimActiveResource extends AbstractActiveResource {
     public static final Logger logger = Logger.getLogger("Scheduler");
 
 
-    public SimActiveResource(final ExactSchedulingFactory exactSchedulingFactory, final SchedulerModel model, final ActiveResourceConfiguration resourceConf) {
-        super(model, resourceConf.getReplicas(), resourceConf.getName(), resourceConf.getId());
+    public SimActiveResource(final ExactSchedulingFactory exactSchedulingFactory, final SchedulerModel model, final ActiveResourceConfiguration resourceConf
+            , IResourceTableManager resourceTableManager) {
+        super(model, resourceConf.getReplicas(), resourceConf.getName(), resourceConf.getId(), resourceTableManager);
         this.resourceConf = resourceConf;
         this.instanceList = new ArrayList<IResourceInstance>();
         this.processRegistry = new ProcessRegistry(this);
