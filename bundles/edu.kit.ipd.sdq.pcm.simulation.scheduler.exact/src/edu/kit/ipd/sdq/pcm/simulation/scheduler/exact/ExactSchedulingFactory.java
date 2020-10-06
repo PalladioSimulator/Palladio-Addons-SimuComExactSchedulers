@@ -64,11 +64,9 @@ import scheduler.configuration.util.ConfigurationSwitch;
 
 public class ExactSchedulingFactory {
 
-
     private String schedulerConfigurationModel = "pathmap://PCM_EXACT_SCHEDULER_MODELS/Library.scheduler";
 
     private final SchedulerModel model;
-
 
     protected static Logger logger = Logger.getLogger(ExactSchedulingFactory.class.getName());
 
@@ -86,23 +84,23 @@ public class ExactSchedulingFactory {
     private final Map<String, PriorityManagerImpl> manager_map = new Hashtable<String, PriorityManagerImpl>();
 
     /* Loads scheduler configuration */
-    public IActiveResource getResource(final SchedulerModel model, final String schedulerName, final long numReplicas
-            , final String sensorDescription, IResourceTableManager resourceTableManager) {
+    public IActiveResource getResource(final SchedulerModel model, final String schedulerName, final long numReplicas,
+            final String sensorDescription, IResourceTableManager resourceTableManager) {
 
         final SchedulerLibrary lib = (SchedulerLibrary) SchedulerTools.loadFromXMI(schedulerConfigurationModel);
         SchedulerConfiguration selectedConf = null;
         for (final SchedulerConfiguration conf : lib.getSchedulerConfiguration()) {
-            if (conf.getName().equals(schedulerName)) {
+            if (conf.getName()
+                .equals(schedulerName)) {
                 selectedConf = conf;
                 break;
             }
         }
         if (selectedConf != null) {
             ActiveResourceConfiguration resourceConf = null;
-            resourceConf = ConfigurationFactory.eINSTANCE
-                    .createActiveResourceConfiguration();
+            resourceConf = ConfigurationFactory.eINSTANCE.createActiveResourceConfiguration();
             resourceConf.setName(schedulerName);
-            resourceConf.setReplicas((int)numReplicas);
+            resourceConf.setReplicas((int) numReplicas);
             resourceConf.setSchedulerConfiguration(selectedConf);
             final SimActiveResource resource = new SimActiveResource(this, model, resourceConf, resourceTableManager);
             final IScheduler scheduler = createScheduler(model, resourceConf.getSchedulerConfiguration(), resource);
@@ -112,28 +110,29 @@ public class ExactSchedulingFactory {
         return null;
     }
 
-    private IScheduler createScheduler(final SchedulerModel model, final SchedulerConfiguration configuration, final IActiveResource scheduled_resource) {
+    private IScheduler createScheduler(final SchedulerModel model, final SchedulerConfiguration configuration,
+            final IActiveResource scheduled_resource) {
         return createPreemptiveScheduler(model, configuration, scheduled_resource);
     }
 
     private IScheduler createPreemptiveScheduler(final SchedulerModel model, final SchedulerConfiguration configuration,
             final IActiveResource scheduled_resource) {
-        final IProcessQueue process_queue_prototype = createProcessQueue(model, configuration
-                .getPriorityConfiguration());
-        final IQueueingStrategy queueing_strategy = createQueueingStrategy(model, configuration.getQueueingConfiguration(),
-                process_queue_prototype, (SimActiveResource) scheduled_resource);
+        final IProcessQueue process_queue_prototype = createProcessQueue(model,
+                configuration.getPriorityConfiguration());
+        final IQueueingStrategy queueing_strategy = createQueueingStrategy(model,
+                configuration.getQueueingConfiguration(), process_queue_prototype,
+                (SimActiveResource) scheduled_resource);
         final boolean in_front_after_waiting = configuration.isInFrontAfterWaiting();
         final double scheduling_interval = configuration.getInterval();
-        return new PreemptiveScheduler(model, (SimActiveResource) scheduled_resource,
-                queueing_strategy, in_front_after_waiting, scheduling_interval, configuration.getStarvationBoost());
+        return new PreemptiveScheduler(model, (SimActiveResource) scheduled_resource, queueing_strategy,
+                in_front_after_waiting, scheduling_interval, configuration.getStarvationBoost());
     }
 
     private IProcessQueue createProcessQueue(final SchedulerModel model, final PriorityConfiguration configuration) {
         if (configuration == null) {
             return new ProcessQueueImpl(model);
         }
-        final PriorityManagerImpl manager = createPriorityManager(configuration
-                .getRange());
+        final PriorityManagerImpl manager = createPriorityManager(configuration.getRange());
         return new PriorityArray(model, manager);
     }
 
@@ -141,29 +140,28 @@ public class ExactSchedulingFactory {
         final String id = getManagerId(range);
         PriorityManagerImpl manager = manager_map.get(id);
         if (manager == null) {
-            manager = new PriorityManagerImpl(range.getHighest(), range
-                    .getHigh(), range.getAverage(), range.getLow(), range
-                    .getLowest(), range.getDefault());
+            manager = new PriorityManagerImpl(range.getHighest(), range.getHigh(), range.getAverage(), range.getLow(),
+                    range.getLowest(), range.getDefault());
             manager_map.put(id, manager);
         }
         return manager;
     }
 
     private String getManagerId(final PriorityRange range) {
-        return range.getHighest() + "_" + range.getHigh() + "_"
-                + range.getAverage() + "_" + range.getLow() + "_"
+        return range.getHighest() + "_" + range.getHigh() + "_" + range.getAverage() + "_" + range.getLow() + "_"
                 + range.getLowest() + "_" + range.getDefault();
     }
 
-    private IQueueingStrategy createQueueingStrategy(final SchedulerModel model, final QueueingConfiguration configuration,
-            final IProcessQueue process_queue_prototype, final SimActiveResource resource) {
-        final IRunQueue runqueue_prototype = createRunQueue(model, configuration
-                .getRunqueueType(), process_queue_prototype);
-        final IInstanceSelector instance_selector = createInstanceSelector(
-                configuration.getInitialInstanceSelection(), resource);
+    private IQueueingStrategy createQueueingStrategy(final SchedulerModel model,
+            final QueueingConfiguration configuration, final IProcessQueue process_queue_prototype,
+            final SimActiveResource resource) {
+        final IRunQueue runqueue_prototype = createRunQueue(model, configuration.getRunqueueType(),
+                process_queue_prototype);
+        final IInstanceSelector instance_selector = createInstanceSelector(configuration.getInitialInstanceSelection(),
+                resource);
 
-        final QueueingConfigurationSwitch qSwitch = new QueueingConfigurationSwitch(
-                runqueue_prototype, instance_selector, this, resource);
+        final QueueingConfigurationSwitch qSwitch = new QueueingConfigurationSwitch(runqueue_prototype,
+                instance_selector, this, resource);
         return qSwitch.doSwitch(configuration);
     }
 
@@ -177,7 +175,7 @@ public class ExactSchedulingFactory {
             return new RoundRobinSelector(resource);
         default:
             assert false : "Unknown InstanceSelector!";
-        break;
+            break;
         }
         return null;
     }
@@ -194,14 +192,12 @@ public class ExactSchedulingFactory {
             break;
         default:
             assert false : "Unknown RunqueueType";
-        break;
+            break;
         }
         return runqueue;
     }
 
-
-    public IResourceInstance createResourceInstance(final int index,
-            final IActiveResource containing_resource) {
+    public IResourceInstance createResourceInstance(final int index, final IActiveResource containing_resource) {
 
         final String id = containing_resource.getId() + index;
 
@@ -216,9 +212,9 @@ public class ExactSchedulingFactory {
     /*
      * (non-Javadoc)
      *
-     * @see de.uka.ipd.sdq.scheduler.builder.ISchedulingFactory#createRunningProcess(de.uka.ipd.sdq.scheduler.ISchedulableProcess,
-     *      scheduler.configuration.ProcessConfiguration,
-     *      scheduler.configuration.ActiveResourceConfiguration)
+     * @see de.uka.ipd.sdq.scheduler.builder.ISchedulingFactory#createRunningProcess(de.uka.ipd.sdq.
+     * scheduler.ISchedulableProcess, scheduler.configuration.ProcessConfiguration,
+     * scheduler.configuration.ActiveResourceConfiguration)
      */
     public IRunningProcess createRunningProcess(final ISchedulableProcess process,
             final ProcessConfiguration configuration, final ActiveResourceConfiguration resourceConfiguration) {
@@ -230,35 +226,37 @@ public class ExactSchedulingFactory {
             if (resourceConfiguration.getReplicas() > 0) {
 
                 if (resourceConfiguration.getSchedulerConfiguration()
-                        .getPriorityConfiguration() != null) {
+                    .getPriorityConfiguration() != null) {
 
                     // set the priority to the right level
-                    final IPriority prio = getPriority(configuration.getPriority(),resourceConfiguration.getSchedulerConfiguration().getPriorityConfiguration().getRange());
+                    final IPriority prio = getPriority(configuration.getPriority(),
+                            resourceConfiguration.getSchedulerConfiguration()
+                                .getPriorityConfiguration()
+                                .getRange());
                     prio.setValue(process.getPriority());
 
                     active_process = new ProcessWithPriority(model, process, prio);
                     final IPriorityUpdateStrategy updateStrategy = createPriorityUpdadateStrategy(
                             resourceConfiguration.getSchedulerConfiguration()
-                            .getPriorityConfiguration()
-                            .getBoostConfiguration(), active_process);
-                    ((ProcessWithPriority) active_process)
-                    .setPriorityUpdateStrategy(updateStrategy);
+                                .getPriorityConfiguration()
+                                .getBoostConfiguration(),
+                            active_process);
+                    ((ProcessWithPriority) active_process).setPriorityUpdateStrategy(updateStrategy);
 
-                    //System.out.println("Creating new process "+ active_process.getName() + " from Closed/Open Workload " + process.getClass().getName() + " with priority " + ((ProcessWithPriority)active_process).getStaticPriority());
+                    // System.out.println("Creating new process "+ active_process.getName() + " from
+                    // Closed/Open Workload " + process.getClass().getName() + " with priority " +
+                    // ((ProcessWithPriority)active_process).getStaticPriority());
 
                 }
                 if (resourceConfiguration.getSchedulerConfiguration()
-                        .getPreemptionConfiguration() != null) {
+                    .getPreemptionConfiguration() != null) {
                     if (active_process == null) {
                         active_process = new PreemptiveProcess(model, process);
                     }
-                    final ITimeSlice timeslice = createTimeSlice(
-                            resourceConfiguration.getSchedulerConfiguration()
-                            .getPreemptionConfiguration(),
-                            active_process);
+                    final ITimeSlice timeslice = createTimeSlice(resourceConfiguration.getSchedulerConfiguration()
+                        .getPreemptionConfiguration(), active_process);
                     timeslice.fullReset();
-                    ((PreemptiveProcess) active_process)
-                    .setTimeSlice(timeslice);
+                    ((PreemptiveProcess) active_process).setTimeSlice(timeslice);
                 } else {
                     active_process = new ActiveProcess(model, process);
                 }
@@ -269,12 +267,11 @@ public class ExactSchedulingFactory {
         return active_process;
     }
 
-    private IPriorityUpdateStrategy createPriorityUpdadateStrategy(
-            final PriorityBoostConfiguration boostConfiguration, final IActiveProcess process) {
+    private IPriorityUpdateStrategy createPriorityUpdadateStrategy(final PriorityBoostConfiguration boostConfiguration,
+            final IActiveProcess process) {
         if (boostConfiguration instanceof DynamicPriorityBoostConfiguratioin) {
             final DynamicPriorityBoostConfiguratioin dynamic = (DynamicPriorityBoostConfiguratioin) boostConfiguration;
-            return new SleepAverageDependentUpdate(model, process, dynamic
-                    .getMaxSleepAverage(), dynamic.getMaxBonus());
+            return new SleepAverageDependentUpdate(model, process, dynamic.getMaxSleepAverage(), dynamic.getMaxBonus());
         }
         return null;
     }
@@ -305,19 +302,17 @@ public class ExactSchedulingFactory {
         return prio;
     }
 
-    private ITimeSlice createTimeSlice(
-            final PreemptionConfiguration preemptionConfiguration,
+    private ITimeSlice createTimeSlice(final PreemptionConfiguration preemptionConfiguration,
             final ActiveProcess process) {
 
         final ConfigurationSwitch<ITimeSlice> timesliceSwitch = new ConfigurationSwitch<ITimeSlice>() {
 
             @Override
-            public ITimeSlice caseQuantumTimeSliceConfiguration(
-                    final QuantumTimeSliceConfiguration configuration) {
+            public ITimeSlice caseQuantumTimeSliceConfiguration(final QuantumTimeSliceConfiguration configuration) {
                 final double timeslice = configuration.getTimeslice();
                 final int quanta = configuration.getQuanta();
                 final int min_quanta = configuration.getMinQuanta();
-                return new QuantumTimeSlice(timeslice,quanta,min_quanta);
+                return new QuantumTimeSlice(timeslice, quanta, min_quanta);
             }
 
             @Override
@@ -326,15 +321,13 @@ public class ExactSchedulingFactory {
                 final double timeslice = configuration.getTimeslice();
                 final double min_timeslice = configuration.getMinTimeslice();
                 final double min_time_to_be_scheduled = configuration.getMinTimeToBeScheduled();
-                return new PriorityDependentTimeSlice(
-                        (ProcessWithPriority) process, timeslice,
-                        min_timeslice, min_time_to_be_scheduled);
+                return new PriorityDependentTimeSlice((ProcessWithPriority) process, timeslice, min_timeslice,
+                        min_time_to_be_scheduled);
             }
         };
 
         if (preemptionConfiguration != null) {
-            final TimeSliceConfiguration timesliceConf = preemptionConfiguration
-                    .getTimesliceConfiguration();
+            final TimeSliceConfiguration timesliceConf = preemptionConfiguration.getTimesliceConfiguration();
             return timesliceSwitch.doSwitch(timesliceConf);
         }
         return null;
@@ -348,25 +341,21 @@ public class ExactSchedulingFactory {
 
         switch (load_balancing.getBalancingType()) {
         case ANY_TO_THRESHOLD:
-            return new ToThresholdBalancer(model, balance_interval,
-                    prio_increasing, queue_ascending, (int)threshold);
+            return new ToThresholdBalancer(model, balance_interval, prio_increasing, queue_ascending, (int) threshold);
         case IDLE_TO_THRESHOLD:
-            //			return new IdleToThresholdBalancer(balance_interval,
-            //					global_balance, prio_increasing, queue_ascending,
-            //					max_iterations, threshold);
+            // return new IdleToThresholdBalancer(balance_interval,
+            // global_balance, prio_increasing, queue_ascending,
+            // max_iterations, threshold);
         case IDLE_TO_ONE:
-            return new OneToIdleBalancer(balance_interval,
-                    prio_increasing, queue_ascending);
+            return new OneToIdleBalancer(balance_interval, prio_increasing, queue_ascending);
         default:
             assert false : "Unknown LoadBalancing Type.";
-        break;
+            break;
         }
         return null;
     }
 
-
-    public IProcessSelector createProcessSelector(
-            final ProcessSelection processSelection) {
+    public IProcessSelector createProcessSelector(final ProcessSelection processSelection) {
         switch (processSelection) {
         case NEXT_RUNNABLE:
             return new NextRunnableProcessSelector();
@@ -374,11 +363,9 @@ public class ExactSchedulingFactory {
             return new PreferIdealAndLastProcessSelector();
         default:
             assert false : "Unknown ProcessSelection";
-        break;
+            break;
         }
         return null;
     }
-
-
 
 }
