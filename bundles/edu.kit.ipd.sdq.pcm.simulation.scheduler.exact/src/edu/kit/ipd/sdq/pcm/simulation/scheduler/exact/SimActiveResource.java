@@ -40,9 +40,8 @@ public class SimActiveResource extends AbstractActiveResource {
 
     public static final Logger logger = Logger.getLogger("Scheduler");
 
-
-    public SimActiveResource(final ExactSchedulingFactory exactSchedulingFactory, final SchedulerModel model, final ActiveResourceConfiguration resourceConf
-            , IResourceTableManager resourceTableManager) {
+    public SimActiveResource(final ExactSchedulingFactory exactSchedulingFactory, final SchedulerModel model,
+            final ActiveResourceConfiguration resourceConf, IResourceTableManager resourceTableManager) {
         super(model, resourceConf.getReplicas(), resourceConf.getName(), resourceConf.getId(), resourceTableManager);
         this.resourceConf = resourceConf;
         this.instanceList = new ArrayList<IResourceInstance>();
@@ -52,7 +51,8 @@ public class SimActiveResource extends AbstractActiveResource {
             instanceList.add(exactSchedulingFactory.createResourceInstance(i, this));
         }
         main_instance = instanceList.get(0);
-        logger.warn("Note that the used exact scheduler " + this.resourceConf.getName() + "assumes that resource demands are specified in milliseconds.");
+        logger.warn("Note that the used exact scheduler " + this.resourceConf.getName()
+                + "assumes that resource demands are specified in milliseconds.");
     }
 
     public IScheduler getScheduler() {
@@ -65,11 +65,11 @@ public class SimActiveResource extends AbstractActiveResource {
 
     public IActiveProcess lookUp(final ISchedulableProcess process) {
         IActiveProcess p = processRegistry.lookUp(process);
-        if (p == null){
+        if (p == null) {
             ISchedulableProcess parent = process;
             IActiveProcess pparent = null;
-            int i=0;
-            do{
+            int i = 0;
+            do {
                 parent = parent.getRootProcess();
                 pparent = processRegistry.lookUp(parent);
                 i++;
@@ -83,11 +83,11 @@ public class SimActiveResource extends AbstractActiveResource {
     }
 
     @Override
-    public void doProcessing(final ISchedulableProcess sched_process, final int resourceServiceID, final double demand) {
+    public void doProcessing(final ISchedulableProcess sched_process, final int resourceServiceID,
+            final double demand) {
         final IActiveProcess process = lookUp(sched_process);
 
-        LoggingWrapper.log(" Process " + process + " demands "
-                + MathTools.round(demand, 0.01));
+        LoggingWrapper.log(" Process " + process + " demands " + MathTools.round(demand, 0.01));
 
         process.setCurrentDemand(demand);
         scheduler.scheduleNextEvent(process.getLastInstance());
@@ -111,11 +111,11 @@ public class SimActiveResource extends AbstractActiveResource {
 
     @Override
     protected void dequeue(final ISchedulableProcess process) {
-        final ActiveProcess myProcess = (ActiveProcess)lookUp(process);
-        final WaitingProcess waiting_process = new WaitingProcess(myProcess,0);
+        final ActiveProcess myProcess = (ActiveProcess) lookUp(process);
+        final WaitingProcess waiting_process = new WaitingProcess(myProcess, 0);
         scheduler.fromRunningToWaiting(waiting_process, waiting_queue, false);
-        //		myProcess.setIdealInstance(null);
-        //		myProcess.setLastInstance(null);
+        // myProcess.setIdealInstance(null);
+        // myProcess.setLastInstance(null);
     }
 
     @Override
@@ -145,9 +145,11 @@ public class SimActiveResource extends AbstractActiveResource {
     }
 
     private WaitingProcess lookUpWaitingProcess(final ISchedulableProcess process) {
-        for (final IWaitingProcess p : waiting_queue){
-            if (((WaitingProcess)p).getActiveProcess().getSchedulableProcess().equals(process)) {
-                return (WaitingProcess)p;
+        for (final IWaitingProcess p : waiting_queue) {
+            if (((WaitingProcess) p).getActiveProcess()
+                .getSchedulableProcess()
+                .equals(process)) {
+                return (WaitingProcess) p;
             }
         }
         return null;
@@ -155,7 +157,7 @@ public class SimActiveResource extends AbstractActiveResource {
 
     @Override
     public void stop() {
-        for( final IResourceInstance ri : instanceList) {
+        for (final IResourceInstance ri : instanceList) {
             ri.stop();
         }
     }
@@ -172,18 +174,19 @@ public class SimActiveResource extends AbstractActiveResource {
 
     @Override
     public void registerProcess(final ISchedulableProcess schedulableProcess) {
-        final ProcessConfiguration processConf = ConfigurationFactory.eINSTANCE
-                .createProcessConfiguration();
+        final ProcessConfiguration processConf = ConfigurationFactory.eINSTANCE.createProcessConfiguration();
         processConf.setName(schedulableProcess.getId());
         processConf.setPriority(PriorityClass.DEFAULT);
         processConf.setReplicas(1);
-        final ProcessWithPriority p = (ProcessWithPriority) exactSchedulingFactory.createRunningProcess(schedulableProcess, processConf, resourceConf);
+        final ProcessWithPriority p = (ProcessWithPriority) exactSchedulingFactory
+            .createRunningProcess(schedulableProcess, processConf, resourceConf);
 
-        if (!processRegistry.isRegistered(p)){
+        if (!processRegistry.isRegistered(p)) {
             processRegistry.registerProcess(p);
             final IResourceInstance instance = getInstanceFor(p);
             scheduler.registerProcess(p, instance);
-            p.getSchedulableProcess().addTerminatedObserver(this);
+            p.getSchedulableProcess()
+                .addTerminatedObserver(this);
         }
     }
 
@@ -193,7 +196,7 @@ public class SimActiveResource extends AbstractActiveResource {
 
     @Override
     public void addObserver(final IActiveResourceStateSensor observer) {
-        for(final IResourceInstance instance : this.instanceList){
+        for (final IResourceInstance instance : this.instanceList) {
             instance.addObserver(observer);
         }
 
@@ -215,7 +218,9 @@ public class SimActiveResource extends AbstractActiveResource {
     @Override
     public int getQueueLengthFor(final SchedulerEntity schedulerEntity, final int coreId) {
         assert (schedulerEntity instanceof SimResourceInstance);
-        // TODO: StB: Fixme: How to use the CoreId here? The following seems to work, but no guarantee
-        return this.scheduler.getQueueLengthFor((SimResourceInstance)this.getInstanceList().get(coreId));
+        // TODO: StB: Fixme: How to use the CoreId here? The following seems to work, but no
+        // guarantee
+        return this.scheduler.getQueueLengthFor((SimResourceInstance) this.getInstanceList()
+            .get(coreId));
     }
 }
