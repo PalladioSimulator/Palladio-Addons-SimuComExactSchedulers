@@ -3,10 +3,10 @@ package edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.jobs;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.AbstractSimuComExtensionJob;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
-import de.uka.ipd.sdq.simucomframework.resources.AbstractScheduledResource;
-import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
-import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.resources.AbstractScheduledResource;
+import de.uka.ipd.sdq.simucomframework.core.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.core.resources.SimulatedResourceContainer;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 

@@ -5,11 +5,11 @@ import org.palladiosimulator.pcm.repository.PassiveResource;
 
 import de.uka.ipd.sdq.scheduler.IActiveResource;
 import de.uka.ipd.sdq.scheduler.IPassiveResource;
-import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
-import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
-import de.uka.ipd.sdq.simucomframework.resources.CalculatorHelper;
-import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.core.SimuComSimProcess;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.core.resources.CalculatorHelper;
+import de.uka.ipd.sdq.simucomframework.core.resources.SimulatedResourceContainer;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.SimActiveResource;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.priority.IPriorityBoost;
 import edu.kit.ipd.sdq.pcm.simulation.scheduler.exact.priority.IPriorityUpdateStrategy;
